@@ -9,3 +9,6 @@ def login(request):
 
 def signup(request):
     return render(request, 'sign-up.html')
+
+def mapping(request):
+    return render(request, 'mapping.html')

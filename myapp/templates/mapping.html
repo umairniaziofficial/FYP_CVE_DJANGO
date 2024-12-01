@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>mapping page </title>
-    <link rel="stylesheet" href="mapping.css">
+    <link rel="stylesheet" href="{% static 'css/mapping.css' %}">
 </head>
 <body>
     <header>
         <div class="logo">
-            <a href="#">
-                <img src="images/logo.png" alt="Your Logo" class="logo-image">
+            <a href="{% url 'index' %}">
+                <img src="{% static 'images/logo.png' %}" alt="Your Logo" class="logo-image">
             </a>
     
         </div>
         <nav>
             <ul class="nav-links">
-                <li><a href="#">Home</a></li>
+                <li><a href="{% url 'index' %}">Home</a></li>
                 <li><a href="#">Services</a></li>
                 <li><a href="#">Contact</a></li>
                 <li><a href="#">Company</a></li>
@@ -50,7 +51,5 @@
 </div>
 
    
-
-
 </body>
 </html>
