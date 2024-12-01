@@ -1,0 +1,166 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4F6;
+  color: #023d47;
+  margin: 0;
+}
+
+
+header {
+    display: flex;
+    justify-content: space-between; /* Keep spacing for the logo and nav */
+    align-items: center;
+    padding: 20px 5%;
+    background-color: #003b47;
+    box-shadow: 0px 4px 6px white;
+    position: relative;
+}
+
+
+.logo {
+    display: flex;
+    align-items: center;   /* Vertically center logo */
+    justify-content: flex-start;  /* Align logo to the left */
+    padding-left: 20px;  /* Adjust if you need more spacing from the left */
+}
+
+.logo-image {
+    height: 60px;       /* Adjust the size of the logo */
+    width: 60px;        /* Make the logo a square */
+    border-radius: 50%; /* Make it circular */
+    object-fit: cover;  /* Ensure the logo scales correctly */
+    transition: transform 0.3s ease; /* Optional: Add hover effect */
+}
+
+.logo-image:hover {
+    transform: scale(1.05); /* Optional: Slightly increase size on hover */
+}
+
+
+nav {
+    flex: 1; /* Allow nav to grow and center itself */
+    display: flex;
+    justify-content: center; /* Center the nav links */
+}
+
+.nav-links {
+    display: flex;
+    list-style-type: none;
+    gap: 30px; /* Adjust spacing between links */
+}
+
+.nav-links a {
+    position: relative; /* Required for positioning the ::after element */
+    text-decoration: none; /* Remove default underline */
+    color: white; /* Default link color */
+    font-size: 16px; /* Base font size */
+    font-weight: bold; /* Keep it prominent */
+    padding: 5px 10px; /* Add padding for better click area */
+    transition: transform 0.3s ease, color 0.3s ease; /* Smooth scaling and color transition */
+}
+
+.nav-links a:hover {
+    transform: scale(1.2); /* Increase the size slightly */
+    color: white; /* Keep the same color */
+}
+
+.nav-links a:hover::after {
+    width: 100%; /* Expand the underline to full width */
+}
+
+.nav-links a::after {
+    content: ""; /* Create an empty pseudo-element */
+    position: absolute;
+    bottom: 0; /* Position at the bottom of the text */
+    left: 0;
+    width: 0%; /* Start with no width */
+    height: 2px; /* Set the height of the underline */
+    background-color: white; /* Match the link color */
+    transition: width 0.3s ease; /* Smooth width animation */
+}
+
+
+
+.container {
+    background-color: #003b47; /* A color matching the website's vibe */
+    border-radius: 20px; /* Smooth rounded corners */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    padding: 50px 60px; /* Spacious padding */
+    margin: 50px auto; /* Center the box with space around */
+    max-width: 800px; /* Large box size for better visibility */
+    color: #f0f9fa; /* Soft white for contrast */
+    text-align: center; /* Center align text */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Smooth hover transitions */
+    position: relative; /* Optional for decorative elements */
+}
+
+
+.container h1 {
+    font-size: 2.2rem; /* Larger heading */
+    font-weight: bold;
+    margin-bottom: 25px; /* Space below heading */
+    color: white; /* Light complementary text color */
+    text-transform: uppercase; /* Uppercase for emphasis */
+    letter-spacing: 1.5px; /* Subtle spacing for modern feel */
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+/* Paragraph inside the box */
+.container p {
+    font-size: 1rem; /* Slightly larger text */
+    line-height: 1.8; /* Better readability */
+    margin-bottom: 30px; /* Space below paragraph */
+    color: white; /* Soft color matching the theme */
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+/* Basic styles for the CVE form */
+#cveForm {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    width: 80%;
+}
+
+.input-group label {
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.submit-btn {
+    background-color: #00707a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #005f5a;
+}
+
+#response {
+    margin-top: 20px;
+    font-size: 1.2rem;
+}

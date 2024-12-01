@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVE MITRE MAPPING-FYP</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <a href="#">
+                <img src="{% static 'images/logo.png' %}" alt="Your Logo" class="logo-image">
+            </a>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Company</a></li>
+                <li><a href="#">Pricing</a></li>
+            </ul>
+        </nav>
+        <div class="cta">
+            <a href="{% url 'signup' %}" class="cta-button">Sign Up</a>
+            <a href="{% url 'login' %}" class="cta-button">Log In</a>
+        </div>
+    </header>
+
+    <!-- Main Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <section class="hero-section">
+                <h1 class="animated-heading">CVE MITRE MAPPING</h1>
+                <p class="subheading">Mapping CVEs to the MITRE ATT&CK Framework effortlessly</p>
+            </section>
+        </div>
+        <div class="hero-image">
+            <img src="{% static 'images/image_black.png' %}" alt="Dashboard Image">
+        </div>
+    </section>
+
+    <div class="fade-in-box" id="projectBox">
+        <h2>Manage your exposure risk from end-to-end</h2>
+        <p>
+            Understand how attackers exploit vulnerabilities, including their tactics, techniques, and common knowledge, to gain access to critical assets or disrupt system functionality.
+        </p>
+        <button onclick="explorePlatform()">Explore the Platform</button>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>PLATFORM</h3>
+                <ul>
+                    <li><a href="#">Platform Overview</a></li>
+                    <li><a href="#">Connectors</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Vulnerability Aggregation</a></li>
+                    <li><a href="#">Vulnerability Correlation</a></li>
+                    <li><a href="#">Vulnerability Intelligence</a></li>
+                    <li><a href="#">Vulnerability Prioritization</a></li>
+                    <li><a href="#">Management Orchestration</a></li>
+                    <li><a href="#">Collaborative Security</a></li>
+                    <li><a href="#">Risk Reporting</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>SOLUTIONS</h3>
+                <ul>
+                    <li><a href="#">Exposure Management</a></li>
+                    <li><a href="#">Risk-Based Vulnerability Management</a></li>
+                    <li><a href="#">Application Vulnerability Management</a></li>
+                    <li><a href="#">Cloud Vulnerability Management</a></li>
+                    <li><a href="#">Financial Services</a></li>
+                    <li><a href="#">Federal Organizations</a></li>
+                    <li><a href="#">Retail Industry</a></li>
+                    <li><a href="#">MSSPs</a></li>
+                    <li><a href="#">Collaborative Security</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>CYBER RISK HUB</h3>
+                <ul>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Resources</a></li>
+                    <li><a href="#">Vulnerability Management Basics</a></li>
+                    <li><a href="#">MITRE Mapper</a></li>
+                    <li><a href="#">CyberRisk Summit</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>COMPANY</h3>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Become a Partner</a></li>
+                    <li><a href="#">Registration</a></li>
+                    <li><a href="#">Awards and Recognition</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright © 2024 FINAL YEAR PROJECT CYS. All rights reserved. <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+            <div class="social-icons">
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-github"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4F6;
+  color: #023d47;
+}
+/* Header Styles */
+
+header {
+    display: flex;
+    justify-content: space-between; /* Keep spacing for the logo and nav */
+    align-items: center;
+    padding: 20px 5%;
+    background-color: #003b47;
+    box-shadow: 0px 4px 6px white;
+    position: relative;
+}
+
+
+.logo {
+    display: flex;
+    align-items: center;   /* Vertically center logo */
+    justify-content: flex-start;  /* Align logo to the left */
+    padding-left: 20px;  /* Adjust if you need more spacing from the left */
+}
+
+.logo-image {
+    height: 60px;       /* Adjust the size of the logo */
+    width: 60px;        /* Make the logo a square */
+    border-radius: 50%; /* Make it circular */
+    object-fit: cover;  /* Ensure the logo scales correctly */
+    transition: transform 0.3s ease; /* Optional: Add hover effect */
+}
+
+.logo-image:hover {
+    transform: scale(1.05); /* Optional: Slightly increase size on hover */
+}
+
+
+nav {
+    flex: 1; /* Allow nav to grow and center itself */
+    display: flex;
+    justify-content: center; /* Center the nav links */
+}
+
+.nav-links {
+    display: flex;
+    list-style-type: none;
+    gap: 30px; /* Adjust spacing between links */
+}
+
+.nav-links a {
+    position: relative; /* Required for positioning the ::after element */
+    text-decoration: none; /* Remove default underline */
+    color: white; /* Default link color */
+    font-size: 16px; /* Base font size */
+    font-weight: bold; /* Keep it prominent */
+    padding: 5px 10px; /* Add padding for better click area */
+    transition: transform 0.3s ease, color 0.3s ease; /* Smooth scaling and color transition */
+}
+
+.nav-links a:hover {
+    transform: scale(1.2); /* Increase the size slightly */
+    color: white; /* Keep the same color */
+}
+
+.nav-links a:hover::after {
+    width: 100%; /* Expand the underline to full width */
+}
+
+.nav-links a::after {
+    content: ""; /* Create an empty pseudo-element */
+    position: absolute;
+    bottom: 0; /* Position at the bottom of the text */
+    left: 0;
+    width: 0%; /* Start with no width */
+    height: 2px; /* Set the height of the underline */
+    background-color: white; /* Match the link color */
+    transition: width 0.3s ease; /* Smooth width animation */
+}
+
+.cta .cta-button {
+    background-color: white;
+    color:#003b47;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* Ensure the hero section is aligned to the top */
+
+
+/* Full viewport height minus the height of the header */
+.hero {
+  min-height: calc(100vh - 100px); /* Adjust 100px based on your header height */
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  flex-direction: column; /* Ensure vertical stacking of heading and subheading */
+  text-align: center; /* Ensure text is centered */
+  padding: 0;
+  margin: 0;
+  padding-top: 1px; /* Adjust for spacing from header */
+}
+
+/* Hero section content */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Animated Heading */
+.animated-heading {
+  font-size: 4rem; /* Large heading */
+  font-weight: bold;
+  color: #004b6b;
+  opacity: 0; 
+  animation: fadeIn 2s ease-in-out forwards;
+  margin: 0;
+  line-height: 1.1;
+  text-align: center;
+  padding-top: 20px;
+}
+
+/* Subheading */
+.subheading {
+  font-size: 1.3rem; /* Adjust subheading font size */
+  color: #00707a;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%;
+  text-align: center;
+  padding-bottom: 30px;
+
+  /* Fade-in animation for subheading */
+  opacity: 0; /* Initially hidden */
+  animation: fadeIn 2s ease-out forwards; /* Fade-in effect */
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+
+
+
+
+
+/* Fade-in animation for the heading */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .hero-section {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .animated-heading {
+    font-size: 2.5rem;
+  }
+  
+ 
+}
+
+.hero-image{
+  border-radius: 130px;
+  animation: fadeIn 2s ease-in-out forwards;
+}
+
+footer {
+    background-color: #003b47;
+    color: white;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .footer-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .footer-column {
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .footer-column h3 {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-column ul li {
+    margin-bottom: 10px;
+  }
+  
+  .footer-column ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  
+  .footer-column ul li a:hover {
+    text-decoration: underline;
+  }
+  
+  .footer-bottom {
+    margin-top: 20px;
+    text-align: center;
+    border-top: 1px solid #00707a;
+    padding-top: 20px;
+  }
+  
+  .footer-bottom a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .footer-bottom a:hover {
+    text-decoration: underline;
+  }
+  
+  .social-icons {
+    margin-top: 10px;
+  }
+  
+  .social-icons i {
+    margin: 0 5px;
+    width: 24px;
+    height: 24px;
+  }
+  
+
+  .fade-in-box {
+    background-color: #025a67; /* A color matching the website's vibe */
+    border-radius: 20px; /* Smooth rounded corners */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    padding: 50px 60px; /* Spacious padding */
+    margin: 50px auto; /* Center the box with space around */
+    max-width: 800px; /* Large box size for better visibility */
+    color: #f0f9fa; /* Soft white for contrast */
+    text-align: center; /* Center align text */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Smooth hover transitions */
+    position: relative; /* Optional for decorative elements */
+}
+
+/* Hover effect: box moves up and shadow changes */
+.fade-in-box:hover {
+    transform: translateY(-15px); /* Move the box slightly upward */
+    box-shadow: 0 16px 25px rgba(0, 0, 0, 0.4); /* Add a stronger shadow */
+    background-color: #004d58; /* Slightly darker background on hover */
+}
+
+/* Headings inside the box */
+.fade-in-box h2 {
+    font-size: 2.2rem; /* Larger heading */
+    font-weight: bold;
+    margin-bottom: 25px; /* Space below heading */
+    color: #e3f2f5; /* Light complementary text color */
+    text-transform: uppercase; /* Uppercase for emphasis */
+    letter-spacing: 1.5px; /* Subtle spacing for modern feel */
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+/* Paragraph inside the box */
+.fade-in-box p {
+    font-size: 1.2rem; /* Slightly larger text */
+    line-height: 1.8; /* Better readability */
+    margin-bottom: 30px; /* Space below paragraph */
+    color: #d6eef0; /* Soft color matching the theme */
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+/* Button inside the box */
+.fade-in-box button {
+    background-color: #003b47; /* Dark teal matching the website */
+    color: white; /* White text for contrast */
+    border: none; /* No border */
+    border-radius: 10px; /* Rounded button */
+    padding: 14px 28px; /* Spacious button */
+    font-size: 1.2rem; /* Slightly larger text */
+    font-weight: bold; /* Bold text */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease; /* Smooth effects */
+}
+
+/* Button hover effect */
+.fade-in-box button:hover {
+    background-color: white; /* Lighter button color */
+    color: #003b47; /* Text color matches the theme */
+    transform: translateY(-3px) scale(1.1); /* Slight upward movement and enlargement */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Highlight shadow */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .fade-in-box {
+        padding: 30px 40px; /* Adjust padding for smaller screens */
+    }
+
+    .fade-in-box h2 {
+        font-size: 1.8rem; /* Smaller heading for mobile */
+    }
+
+    .fade-in-box p {
+        font-size: 1rem; /* Smaller paragraph */
+    }
+
+    .fade-in-box button {
+        padding: 12px 24px; /* Adjust button size for smaller screens */
+    }
+}

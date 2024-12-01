@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mapping page </title>
+    <link rel="stylesheet" href="mapping.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="#">
+                <img src="images/logo.png" alt="Your Logo" class="logo-image">
+            </a>
+    
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Company</a></li>
+                <li><a href="#">Pricing</a></li>
+            </ul>
+        </nav>
+        
+    </header>
+
+
+    <div class="container">
+        <h1>Mapping CVEs to MITRE ATT&CK</h1>
+        <p>
+            Cyber vulnerabilities, identified by their unique CVE IDs, describe potential weaknesses in software and hardware systems. Mapping these vulnerabilities to the MITRE ATT&CK Framework provides actionable insights by linking them to known adversarial tactics, techniques, and procedures (TTPs).
+        </p>
+     
+     
+    </div>
+
+
+    <form id="cveForm">
+        <div class="input-group">
+            
+            <input type="text" id="cveId" name="cveId" required placeholder="Enter CVE ID">
+        </div>
+        <button type="submit" class="submit-btn">Submit</button>
+    </form>
+
+    <div id="response"></div>  
+
+</div>
+
+   
+
+
+</body>
+</html>
