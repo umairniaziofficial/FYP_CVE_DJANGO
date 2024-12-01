@@ -38,6 +38,14 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "myapp",
+    "tailwind",
+    "theme",
+]
+
+TAILWIND_APP_NAME = "theme"
+
+INTERNAL_IPS = [
+    "127.0.0.1",
 ]
 
 MIDDLEWARE = [
@@ -48,6 +56,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = "FYP.urls"
@@ -126,10 +135,13 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # Redirect URLs
-LOGIN_URL = '/login/'  # Redirect if the user is not logged in
-LOGIN_REDIRECT_URL = '/'  # Redirect after login
-LOGOUT_REDIRECT_URL = '/'  # Redirect after logout
+LOGIN_URL = "/login/"  # Redirect if the user is not logged in
+LOGIN_REDIRECT_URL = "/"  # Redirect after login
+LOGOUT_REDIRECT_URL = "/"  # Redirect after logout
 
 # Optional: Add a session timeout (e.g., 30 minutes)
 SESSION_COOKIE_AGE = 1800  # 30 minutes in seconds
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+
+NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
