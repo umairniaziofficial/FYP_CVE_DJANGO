@@ -5,58 +5,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mapping Page</title>
-    <link rel="stylesheet" href="{% static 'css/mapping.css' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <header>
-        <div class="logo">
-            <a href="{% url 'index' %}">
-                <img src="{% static 'images/logo.png' %}" alt="Your Logo" class="logo-image">
-            </a>
-        </div>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="{% url 'index' %}">Home</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Company</a></li>
-                <li><a href="#">Pricing</a></li>
-            </ul>
-        </nav>
-        <div class="cta">
-            {% if user.is_authenticated %}
-                <span style="color:white;font-size:18px;padding-right:12px;">Welcome, <span style="color:yellow;">{{ user.first_name }}!</span></span>
-                <a href="{% url 'logout' %}" class="cta-button">Logout</a>
-            {% else %}
-                <a href="{% url 'login' %}" class="cta-button">Login</a>
-                <a href="{% url 'signup' %}" class="cta-button">Sign Up</a>
-            {% endif %}
+<body class="bg-gray-900 text-gray-100 min-h-screen flex flex-col">
+    <header class="bg-gray-800 text-gray-200">
+        <div class="container mx-auto flex items-center justify-between p-4">
+            <div class="logo">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'images/logo.png' %}" alt="Your Logo" class="h-12 rounded-full">
+                </a>
+            </div>
+               
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="{% url 'index' %}" class="hover:text-yellow-400">Home</a></li>
+                    <li><a href="#" class="hover:text-yellow-400">Services</a></li>
+                    <li><a href="#" class="hover:text-yellow-400">Contact</a></li>
+                    <li><a href="#" class="hover:text-yellow-400">Company</a></li>
+                    <li><a href="#" class="hover:text-yellow-400">Pricing</a></li>
+                </ul>
+            </nav>
+            <div>
+                {% if user.is_authenticated %}
+                    <span class="text-lg pr-4">Welcome, <span class="text-yellow-400">{{ user.first_name }}</span>!</span>
+                    <a href="{% url 'logout' %}" class="bg-red-500 px-4 py-2 rounded text-white hover:bg-red-600">Logout</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="bg-blue-500 px-4 py-2 rounded text-white hover:bg-blue-600">Login</a>
+                    <a href="{% url 'signup' %}" class="ml-2 bg-green-500 px-4 py-2 rounded text-white hover:bg-green-600">Sign Up</a>
+                {% endif %}
+            </div>
         </div>
     </header>
 
-    <div class="container">
-        <h1>Mapping CVEs to MITRE ATT&CK</h1>
-        <p>
-            Cyber vulnerabilities, identified by their unique CVE IDs, describe potential weaknesses in software and hardware systems. Mapping these vulnerabilities to the MITRE ATT&CK Framework provides actionable insights by linking them to known adversarial tactics, techniques, and procedures (TTPs).
+    <main class="container mx-auto flex flex-col items-center mt-10 px-4">
+        <h1 class="text-3xl font-bold text-center mb-4">Mapping CVEs to MITRE ATT&CK</h1>
+        <p class="text-center text-lg mb-8">
+            Cyber vulnerabilities, identified by their unique CVE IDs, describe potential weaknesses in software and hardware systems.
+            Mapping these vulnerabilities to the MITRE ATT&CK Framework provides actionable insights by linking them to known adversarial tactics, techniques, and procedures (TTPs).
         </p>
-    </div>
 
-    <form id="cveForm" method="post">
-        {% csrf_token %}
-        <div class="input-group">
-            <input type="text" id="cveId" name="cveId" required placeholder="Enter CVE ID">
-        </div>
-        <button type="submit" class="submit-btn">Submit</button>
-    </form>
-
-    <div id="response">
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    </div>
+        <form id="cveForm" method="post" class="bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-lg">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="cveId" class="block text-sm font-medium mb-2">Enter CVE ID</label>
+                <input type="text" id="cveId" name="cveId" required placeholder="e.g., CVE-2023-12345"
+                    class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+            </div>
+            <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 rounded">
+                Submit
+            </button>
+        </form>
+    </main>
 </body>
 </html>
