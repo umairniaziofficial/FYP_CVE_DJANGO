@@ -4,7 +4,7 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mapping page </title>
+    <title>Mapping Page</title>
     <link rel="stylesheet" href="{% static 'css/mapping.css' %}">
 </head>
 <body>
@@ -13,7 +13,6 @@
             <a href="{% url 'index' %}">
                 <img src="{% static 'images/logo.png' %}" alt="Your Logo" class="logo-image">
             </a>
-    
         </div>
         <nav>
             <ul class="nav-links">
@@ -24,32 +23,40 @@
                 <li><a href="#">Pricing</a></li>
             </ul>
         </nav>
-        
+        <div class="cta">
+            {% if user.is_authenticated %}
+                <span style="color:white;font-size:18px;padding-right:12px;">Welcome, <span style="color:yellow;">{{ user.first_name }}!</span></span>
+                <a href="{% url 'logout' %}" class="cta-button">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="cta-button">Login</a>
+                <a href="{% url 'signup' %}" class="cta-button">Sign Up</a>
+            {% endif %}
+        </div>
     </header>
-
 
     <div class="container">
         <h1>Mapping CVEs to MITRE ATT&CK</h1>
         <p>
             Cyber vulnerabilities, identified by their unique CVE IDs, describe potential weaknesses in software and hardware systems. Mapping these vulnerabilities to the MITRE ATT&CK Framework provides actionable insights by linking them to known adversarial tactics, techniques, and procedures (TTPs).
         </p>
-     
-     
     </div>
 
-
-    <form id="cveForm">
+    <form id="cveForm" method="post">
+        {% csrf_token %}
         <div class="input-group">
-            
             <input type="text" id="cveId" name="cveId" required placeholder="Enter CVE ID">
         </div>
         <button type="submit" class="submit-btn">Submit</button>
     </form>
 
-    <div id="response"></div>  
-
-</div>
-
-   
+    <div id="response">
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
 </body>
 </html>
