@@ -66,6 +66,16 @@
         const cveIdInput = document.getElementById('cveId');
         const cveDetailsDiv = document.getElementById('cveDetails');
         const loader = document.getElementById('loader');
+        let offlineData = null;
+
+        fetch("{% static 'json/offlineData.json' %}")
+            .then(response => response.json())
+            .then(data => {
+                offlineData = data;
+            })
+            .catch(error => {
+                console.error("Error loading offline data:", error);
+            });
 
         cveForm.addEventListener('submit', async (event) => {
             event.preventDefault();
@@ -74,31 +84,46 @@
                 loader.classList.remove('hidden');
                 cveDetailsDiv.classList.add('hidden'); 
 
-                try {
-                    const response = await fetch(`https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=${encodeURIComponent(cveId)}`);
-                    if (!response.ok) {
-                        throw new Error('Error fetching data from NVD');
-                    }
-
-                    const data = await response.json();
+                const localResult = searchOfflineData(cveId);
+                if (localResult) {
                     loader.classList.add('hidden');
+                    displayCveDetails(localResult);
+                } else {
+                    try {
+                        const response = await fetch(`https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=${encodeURIComponent(cveId)}`);
+                        if (!response.ok) {
+                            throw new Error('Error fetching data from NVD');
+                        }
 
-                    if (data.vulnerabilities.length === 0) {
-                        displayErrorMessage('No data found for the provided CVE ID');
-                        return;
+                        const data = await response.json();
+                        loader.classList.add('hidden');
+
+                        if (data.vulnerabilities.length === 0) {
+                            displayErrorMessage('No data found for the provided CVE ID');
+                            return;
+                        }
+
+                        const cveDetails = data.vulnerabilities[0].cve;
+                        displayCveDetails(cveDetails);
+                    } catch (error) {
+                        console.error('Error:', error);
+                        loader.classList.add('hidden');
+                        displayErrorMessage('An error occurred while fetching CVE data. Please try again later.');
                     }
-
-                    const cveDetails = data.vulnerabilities[0].cve;
-                    displayCveDetails(cveDetails);
-                } catch (error) {
-                    console.error('Error:', error);
-                    loader.classList.add('hidden');
-                    displayErrorMessage('An error occurred while fetching CVE data. Please try again later.');
                 }
             } else {
                 displayErrorMessage('Please enter a valid CVE ID');
             }
         });
+
+        function searchOfflineData(cveId) {
+            if (!offlineData || !offlineData.vulnerabilities) {
+                return null;
+            }
+
+            const result = offlineData.vulnerabilities.find(vuln => vuln.cve.id === cveId);
+            return result ? result.cve : null;
+        }
 
         function displayErrorMessage(message) {
             cveDetailsDiv.innerHTML = `
@@ -111,10 +136,10 @@
 
         function displayCveDetails(cveDetails) {
             const description = cveDetails.descriptions.find(desc => desc.lang === "en")?.value || 'No English description available.';
-            const cvss3 = cveDetails.metrics.cvssMetricV31[0]?.cvssData || null;
-            const cvss2 = cveDetails.metrics.cvssMetricV2[0]?.cvssData || null;
-            const weaknesses = cveDetails.weaknesses.map(weakness => weakness.description.map(desc => desc.value).join(', ')).join('; ');
-            const references = cveDetails.references.map(ref => `<a href="${ref.url}" target="_blank" class="text-blue-500 hover:underline">${ref.url}</a>`).join('<br>');
+            const cvss3 = cveDetails.metrics?.cvssMetricV31?.[0]?.cvssData || null;
+            const cvss2 = cveDetails.metrics?.cvssMetricV2?.[0]?.cvssData || null;
+            const weaknesses = cveDetails.weaknesses?.map(weakness => weakness.description.map(desc => desc.value).join(', ')).join('; ') || 'No weaknesses listed';
+            const references = cveDetails.references?.map(ref => `<a href="${ref.url}" target="_blank" class="text-blue-500 hover:underline">${ref.url}</a>`).join('<br>') || 'No references available';
 
             cveDetailsDiv.innerHTML = `
                 <h2 class="text-2xl font-bold mb-2 text-yellow-300">CVE Details for ${cveDetails.id}</h2>
@@ -131,13 +156,14 @@
                     <p class="mb-2">Severity: <span class="font-semibold ${cvss2 && cvss2.baseSeverity === 'HIGH' ? 'text-red-500' : 'text-yellow-500'}">${cvss2 ? cvss2.baseSeverity : 'N/A'}</span></p>
                 </div>
                 <h3 class="text-xl font-semibold mb-2 text-yellow-400">Weaknesses</h3>
-                <p class="mb-4">${weaknesses || 'No weaknesses listed'}</p>
+                <p class="mb-4">${weaknesses}</p>
                 <h3 class="text-xl font-semibold mb-2 text-yellow-400">References</h3>
-                ${references || 'No references available'}
+                ${references}
             `;
             cveDetailsDiv.classList.remove('hidden');
         }
     });
 </script>
 {% endblock %}
+
 
