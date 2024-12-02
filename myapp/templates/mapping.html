@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
- 
+
 {% block title %}CVE MITRE MAPPING-FYP{% endblock %}
 
 {% block content %}
@@ -82,7 +82,7 @@
             const cveId = cveIdInput.value.trim();
             if (cveId) {
                 loader.classList.remove('hidden');
-                cveDetailsDiv.classList.add('hidden'); 
+                cveDetailsDiv.classList.add('hidden');
 
                 const localResult = searchOfflineData(cveId);
                 if (localResult) {
@@ -121,8 +121,8 @@
                 return null;
             }
 
-            const result = offlineData.vulnerabilities.find(vuln => vuln.cve.id === cveId);
-            return result ? result.cve : null;
+            const result = offlineData.vulnerabilities.find(vuln => vuln.cve_id === cveId);
+            return result ? result : null;
         }
 
         function displayErrorMessage(message) {
@@ -135,28 +135,28 @@
         }
 
         function displayCveDetails(cveDetails) {
-            const description = cveDetails.descriptions.find(desc => desc.lang === "en")?.value || 'No English description available.';
-            const cvss3 = cveDetails.metrics?.cvssMetricV31?.[0]?.cvssData || null;
-            const cvss2 = cveDetails.metrics?.cvssMetricV2?.[0]?.cvssData || null;
-            const weaknesses = cveDetails.weaknesses?.map(weakness => weakness.description.map(desc => desc.value).join(', ')).join('; ') || 'No weaknesses listed';
-            const references = cveDetails.references?.map(ref => `<a href="${ref.url}" target="_blank" class="text-blue-500 hover:underline">${ref.url}</a>`).join('<br>') || 'No references available';
+            const description = cveDetails.description || 'No description available.';
+            const cvss3 = cveDetails.cvss3 || null;
+            const cvss2 = cveDetails.cvss2 || null;
+            const weaknesses = cveDetails.weaknesses?.join(', ') || 'No weaknesses listed';
+            const references = cveDetails.references?.map(ref => `<a href="${ref}" target="_blank" class="text-blue-500 hover:underline">${ref}</a>`).join('<br>') || 'No references available';
 
             cveDetailsDiv.innerHTML = `
-                <h2 class="text-2xl font-bold mb-2 text-yellow-300">CVE Details for ${cveDetails.id}</h2>
+                <h2 class="text-2xl font-bold mb-2 text-yellow-300">CVE Details for ${cveDetails.cve_id}</h2>
                 <p class="mb-4 text-gray-300">${description}</p>
                 <div class="bg-gray-800 p-4 rounded-lg shadow-md mb-4">
                     <h3 class="text-xl font-semibold mb-2 text-yellow-400">CVSS v3.1</h3>
-                    <p class="mb-2">Base Score: <span class="font-mono">${cvss3 ? cvss3.baseScore : 'N/A'}</span></p>
-                    <p class="mb-2">Severity: <span class="font-semibold ${cvss3 && cvss3.baseSeverity === 'HIGH' ? 'text-red-500' : 'text-yellow-500'}">${cvss3 ? cvss3.baseSeverity : 'N/A'}</span></p>
-                    <p class="mb-2">Attack Vector: <span class="font-mono">${cvss3 ? cvss3.attackVector : 'N/A'}</span></p>
+                    <p class="mb-2">Base Score: <span class="font-mono">${cvss3 ? cvss3.base_score : 'N/A'}</span></p>
+                    <p class="mb-2">Severity: <span class="font-semibold ${cvss3 && cvss3.severity === 'HIGH' ? 'text-red-500' : 'text-yellow-500'}">${cvss3 ? cvss3.severity : 'N/A'}</span></p>
+                    <p class="mb-2">Attack Vector: <span class="font-mono">${cvss3 ? cvss3.attack_vector : 'N/A'}</span></p>
                 </div>
                 <div class="bg-gray-800 p-4 rounded-lg shadow-md mb-4">
                     <h3 class="text-xl font-semibold mb-2 text-yellow-400">CVSS v2.0</h3>
-                    <p class="mb-2">Base Score: <span class="font-mono">${cvss2 ? cvss2.baseScore : 'N/A'}</span></p>
-                    <p class="mb-2">Severity: <span class="font-semibold ${cvss2 && cvss2.baseSeverity === 'HIGH' ? 'text-red-500' : 'text-yellow-500'}">${cvss2 ? cvss2.baseSeverity : 'N/A'}</span></p>
+                    <p class="mb-2">Base Score: <span class="font-mono">${cvss2 ? cvss2.base_score : 'N/A'}</span></p>
+                    <p class="mb-2">Severity: <span class="font-semibold ${cvss2 && cvss2.severity === 'HIGH' ? 'text-red-500' : 'text-yellow-500'}">${cvss2 ? cvss2.severity : 'N/A'}</span></p>
                 </div>
                 <h3 class="text-xl font-semibold mb-2 text-yellow-400">Weaknesses</h3>
-                <p class="mb-4">${weaknesses}</p>
+                <p class="mb-4 text-gray-300">${weaknesses}</p>
                 <h3 class="text-xl font-semibold mb-2 text-yellow-400">References</h3>
                 ${references}
             `;
@@ -165,5 +165,3 @@
     });
 </script>
 {% endblock %}
-
-
